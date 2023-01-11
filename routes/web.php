@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
-use App\Models\Post;
+use App\Http\Controllers\TodoListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,23 +14,10 @@ use App\Models\Post;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [TodoListController::class, 'index']);
 
-    Post::create([
-        'title' => 'First Post',
-        'slug' => 'first-post',
-        'content' => 'This is my first post, wow!'
-    ]);
 
-    return 'Well hello there';
-});
+Route::post('/saveItemRoute', [TodoListController::class, 'saveItem'])->name('saveItem');
 
-Route::get('/find/{id}', function ($id) {
-    $post = Post::find($id);
-    return view('first-post', ['post' => $post]);
-});
 
-Route::get('/destroy/{id}', function ($id) {
-    Post::destroy($id);
-    return 'post was deleted';
-});
+Route::post('/markCompleteRoute/{id}', [TodoListController::class, 'markComplete'])->name('markComplete');
