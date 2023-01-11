@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+
+    Post::create([
+        'title' => 'First Post',
+        'slug' => 'first-post',
+        'content' => 'This is my first post, wow!'
+    ]);
+
     return 'Well hello there';
+});
+
+Route::get('/find/{id}', function ($id) {
+    $post = Post::find($id);
+    return view('first-post', ['post' => $post]);
+});
+
+Route::get('/destroy/{id}', function ($id) {
+    Post::destroy($id);
+    return 'post was deleted';
 });
