@@ -16,6 +16,12 @@ a {
     display: none;
 }
 
+#completed-items {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+}
+
 html {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
         Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,

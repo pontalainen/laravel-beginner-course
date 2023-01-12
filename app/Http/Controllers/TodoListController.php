@@ -9,12 +9,16 @@ class TodoListController extends Controller
 {
     public function index()
     {
-        return view('todo-list', ['listItems' => listItem::where('is_complete', 0)->get()]);
+        return view(
+            'todo-list',
+            ['listItems' => listItem::where('is_complete', 0)->get()],
+            ['completedItems' => listItem::where('is_complete', 1)->get()]
+        );
     }
 
     public function markComplete($id)
     {
-        $listItem  = ListItem::find($id);
+        $listItem = listItem::find($id);
         $listItem->is_complete = 1;
         $listItem->save();
 
@@ -24,10 +28,19 @@ class TodoListController extends Controller
     public function saveItem(Request $request)
     {
 
-        $newListItem = new ListItem;
+        $newListItem = new listItem;
         $newListItem->name = $request->listItem;
         $newListItem->is_complete = 0;
         $newListItem->save();
+
+        return redirect('/');
+    }
+
+    public function removeItem($id)
+    {
+
+        $listItem = listItem::find($id);
+        $listItem->delete();
 
         return redirect('/');
     }

@@ -21,3 +21,9 @@ Route::post('/saveItemRoute', [TodoListController::class, 'saveItem'])->name('sa
 
 
 Route::post('/markCompleteRoute/{id}', [TodoListController::class, 'markComplete'])->name('markComplete');
+
+
+Route::post('removeItemRoute/{id}', [TodoListController::class, 'removeItem'])->name('removeItem');
+
+
+Route::post('removeAllRoute/{id}', [TodoListController::class, 'removeAll'])->name('removeAll');
