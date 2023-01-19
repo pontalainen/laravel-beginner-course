@@ -53,19 +53,22 @@
 
                     {{--! Här existerar inte variablen $completedItems, vilket stör mig som fan, --}}
                     {{--! men jag vet inte hur jag ska lösa skiten bruh --}}
-                    <form method="post" action="{{ route('removeAll', $completedItem->id) }}" accept-charset="UTF-8">
-                        {{ csrf_field() }}
-                        <button type="submit" style="max-height: 25px; margin-left: 20px;">Remove</button>
-                    </form>
-
+                    
                     @foreach ($completedItems as $completedItem)
                     <p>Completed item: {{ $completedItem->name }}</p>
-
+                    
                     <form method="post" action="{{ route('removeItem', $completedItem->id) }}" accept-charset="UTF-8">
                         {{ csrf_field() }}
                         <button type="submit" style="max-height: 25px; margin-left: 20px;">Remove</button>
                     </form>
                     @endforeach
+
+                    @if ($completedItems->count() >= 1 && $listItems->count() >= 1)    
+                    <form method="post" action="{{ route('removeAll', $listItem->id) }}" accept-charset="UTF-8">
+                        {{ csrf_field() }}
+                        <button type="submit" style="max-height: 25px; margin-left: 20px;">Remove All</button>
+                    </form>
+                    @endif
 
                 </div>
 

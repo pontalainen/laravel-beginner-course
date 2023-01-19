@@ -44,4 +44,12 @@ class TodoListController extends Controller
 
         return redirect('/');
     }
+
+    public function removeAll()
+    {
+        $completedItem = listItem::where('is_complete', 1);
+        $completedItem->delete();
+
+        return redirect('/');
+    }
 }
